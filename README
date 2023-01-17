@@ -1,0 +1,47 @@
+AUTOR: ALEKSANDRA STĘPIEŃ               12.01.2023
+
+TEMAT PROJEKTU:
+
+Wielomiany na bazie list powiązanych pojedynczo i posortowanych.
+Jeden węzeł listy reprezentuje jeden wyraz wielomianu i przechowuje atrybuty 'degree' oraz 'coefficient'.
+Węzły są sortowane względem atrybutu 'degree'.
+
+ZAWARTOSC:
+- polynomials.py
+- polynomials_test.py
+- Readme
+- Makefile
+
+URUCHOMIENIE:
+Aby uruchomic program, nalezy bedac w katalogu projektu wpisac komende make run.
+Po wpisaniu uruchomione zostana testy
+
+OPIS PROJEKTU:
+Programem glownym jest program polynomials.py, ktory sklada sie z dwoch klas - klasy Node oraz klasy Polynomial.
+Klasa Node reprezentuje pojedynczy wyraz wielomianu, skladajacy sie dwoch atrybutow - 'coefficient' oraz 'degree'.
+Klasa Polynomial reprezentuje caly wielomian oraz zawarta jest w niej implementacja wielu funkcjonalnosci oraz
+operacji dla wielomianow m.in:
+- wstawianie nowego wyrazu do wielomianu
+- usuwanie konkretnego wezla wielomianu
+- obliczanie ilosci wyrazow wielomianu
+- porownywanie wielomianow
+- wyliczanie stopnia wielomianu
+- wyliczanie wartosci wielomianu w danym punkcie algorytmem Hornera
+- dodawanie wielomianow
+- odejmowanie wielomianow
+- mnozenie wielomianow
+- dzielenie wielomianow
+
+Wyrazy wielomianow sa posortowane wzgledem atrybutu 'degree' w kolejnosci malejacej.
+Ulatwia to znacznie operacje wielomianowe, a szczegolnie dzielenie oraz algorytm Hornera.
+Podczas wstawiania nowego wezla do wielomianu, wstawiany jest on od razu na swoje miejsce,
+dzieki czemu po kazdym wstawieniu nowego wezla, calosc wielomianu jest od razu posortowana.
+
+Wiekszosc operacji dziala w czasie O(n) oprocz mnozenia wielomianow, ktore dziala w czasie O(n^2)
+
+========================================================================================================================
+
+Dodatkowo w projekcie zawarty jest plik polynomials_test.py, ktory zawiera testy sprawdzajace dzialanie
+zaimplementowanych metod
+
+
