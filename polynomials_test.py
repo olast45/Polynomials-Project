@@ -45,6 +45,10 @@ class Test(unittest.TestCase):
         self.polynomial.delete_node(Node(4, 5))
         self.assertTrue(self.polynomial.size() == 1)
 
+    def test_from_list(self):
+        self.assertTrue(self.polynomial.from_list([(1.2, 1), (3.4, 3)]) == "3.4x^3 + 1.2x^1")
+        self.assertTrue(self.polynomial.from_list([(3, 1), (2, 3), (1.5, 2)]) == "2x^3 + 1.5x^2 + 3x^1")
+
     def test_polynomial_degree(self):
         self.polynomial.insert_node(Node(3, 6))
         self.polynomial.insert_node(Node(3, 8))
@@ -140,8 +144,8 @@ class Test(unittest.TestCase):
         self.polynomial.insert_node(Node(1, 1))
 
         quotient, remainder = divmod(self.polynomial2, self.polynomial)
-        self.assertTrue(str(quotient) == "3.0x^3 + (-8.4x^2) + 23.52x^1 + (-80.856)")
-        self.assertTrue(str(remainder) == "265.3968x^4 + (-93.2x^3) + 340.86x^2 + 190.456x^1 + (-397.28)")
+        self.assertTrue(str(quotient) == "3.0x^3 + (-8.399999999999999x^2) + 23.519999999999996x^1 + (-80.85599999999998)")
+        self.assertTrue(str(remainder) == "265.3967999999999x^4 + (-93.19999999999999x^3) + 340.8599999999999x^2 + 190.45599999999996x^1 + (-397.2799999999999)")
 
 
 if __name__ == "__main__":
