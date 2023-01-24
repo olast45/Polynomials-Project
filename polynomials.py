@@ -117,12 +117,20 @@ class Polynomial:
                     if current_node.next is None:
                         current_node.next = node
 
+    @staticmethod
+    def from_list(_list):
+        result = Polynomial()
+        for pair in _list:
+            coefficient, degree = pair
+            result.insert_node(Node(coefficient, degree))
+        return result
+
     def check_if_zero(self):
-        node_to_delete = self.head
-        while node_to_delete is not None:
-            if node_to_delete.coefficient == 0:
-                self.delete_node(node_to_delete)
-            node_to_delete = node_to_delete.next
+        current_node = self.head
+        while current_node is not None:
+            if current_node.coefficient == 0:
+                self.delete_node(current_node)
+            current_node = current_node.next
 
     def polynomial_degree(self):  # STOPIEN WIELOMIANU
         return self.head.degree
@@ -132,19 +140,13 @@ class Polynomial:
             return 0
         current_node = self.head
         max_degree = current_node.degree
-        while current_node.next is not None:
-            current_node = current_node.next
-        min_degree = current_node.degree
 
         current_node = self.head
         result = current_node.coefficient
-        for i in reversed(range(min_degree, max_degree)):
-            if current_node.next is not None:
-                if current_node.next.degree == i:
-                    result = (result * x_value) + current_node.next.coefficient
-                    current_node = current_node.next
-                else:
-                    result = (result * x_value)
+        for i in reversed(range(0, max_degree)):
+            if current_node.next is not None and current_node.next.degree == i:
+                result = (result * x_value) + current_node.next.coefficient
+                current_node = current_node.next
             else:
                 result = (result * x_value)
         return result
@@ -192,7 +194,6 @@ class Polynomial:
 
     def __divmod__(self, divisor):  # DZIELENIE WIELOMIANOW Z RESZTA
         quotient = Polynomial()
-        remainder = Polynomial()
         dividend = self
 
         if divisor.is_empty():
@@ -206,7 +207,7 @@ class Polynomial:
                 # nie musimy sprawdzac czy divisor.head.coefficient jest = 0, bo 0 nie dodajemy
                 coefficient = dividend.head.coefficient / divisor.head.coefficient
                 degree = dividend.head.degree - divisor.head.degree
-                quotient.insert_node(Node(round(coefficient, 4), degree))
+                quotient.insert_node(Node(coefficient, degree))
 
                 term = Polynomial()
                 term.insert_node(Node(coefficient, degree))
@@ -214,11 +215,10 @@ class Polynomial:
 
                 dividend = (dividend - term)
 
-            div_node = dividend.head
-            while div_node is not None:
-                remainder.insert_node(Node(round(div_node.coefficient, 4), div_node.degree))
-                div_node = div_node.next
+            remainder = dividend
 
             quotient.check_if_zero()
             remainder.check_if_zero()
             return quotient, remainder
+
+
